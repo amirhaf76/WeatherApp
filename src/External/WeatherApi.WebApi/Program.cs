@@ -1,6 +1,7 @@
-using Microsoft.Extensions.Options;
-using System.Runtime.CompilerServices;
+using WeatherApp.Application;
+using WeatherApp.WebApi.Configurations;
 using WeatherApp.WebApi.Extensions;
+using WeatherApp.WebApi.Implementations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,8 +12,13 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
 builder.Services.AddWeatherHttpClient();
+
+builder.Services.ConfigureOptions<OpenWeatherApiOptionsSetUp>();
+
+builder.Services.AddScoped<IWeatherService, WeatherService>();
+builder.Services.AddScoped<IWeatherValidator, WeatherValidator>();
+
 
 var app = builder.Build();
 

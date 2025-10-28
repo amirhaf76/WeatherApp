@@ -2,7 +2,7 @@
 {
     public class OpenWeatherApiOptions
     {
-        public string Uri { get; set; } = string.Empty;
-        public string ApiKey { get; set; } = string.Empty;
+        public string Url { get; set; } = string.Empty;
+        public string AppId { get; set; } = string.Empty;
     }
 }

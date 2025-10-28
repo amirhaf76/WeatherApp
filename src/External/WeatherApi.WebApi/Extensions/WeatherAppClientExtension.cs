@@ -9,30 +9,30 @@ public static class WeatherAppClientExtension
     {
         sc.AddHttpClient(WeatherAppClient.OPEN_WEATHER_API, (sp, httpClient) =>
         {
-            var logger = sp.GetService<ILogger>();
+            var logger = sp.GetService<ILogger<HttpClient>>();
 
             var apiOptions = sp.GetService<IOptions<OpenWeatherApiOptions>>()?.Value;
 
 
             if (apiOptions is null)
             {
-                logger?.LogError("{0} is null!", nameof(OpenWeatherApiOptions));
+                logger?.LogError("{options} is null!", nameof(OpenWeatherApiOptions));
                 throw new NotFoundOpenWeatherApiException();
             }
             else
             {
-                logger?.LogDebug("{0} { Uri: {1} }", nameof(OpenWeatherApiOptions), apiOptions.Uri);
+                logger?.LogDebug("{options} Uri: {url} ", nameof(OpenWeatherApiOptions), apiOptions.Url);
             }
 
 
-            var uriBuilder = new UriBuilder(apiOptions.Uri)
+            var uriBuilder = new UriBuilder(apiOptions.Url)
             {
-                Query = $"appid={apiOptions.ApiKey}"
+                Query = $"appid={apiOptions.AppId}"
             };
 
             httpClient.BaseAddress = uriBuilder.Uri;
 
-            logger?.LogDebug("{0} url is {1}", WeatherAppClient.OPEN_WEATHER_API, httpClient.BaseAddress);
+            logger?.LogDebug("{client} url is {url}", WeatherAppClient.OPEN_WEATHER_API, httpClient.BaseAddress);
         });
 
         return sc;
