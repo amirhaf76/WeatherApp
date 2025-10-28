@@ -1,1 +1,2 @@
-1: 45 mins
+1: 45 mins first structure
+2: 2 hours 50 mins 

@@ -1,10 +1,13 @@
-﻿namespace WeatherApp.Application;
+﻿using WeatherApp.Application.Requests;
+using WeatherApp.Application.Responses;
+
+namespace WeatherApp.Application;
 
 public interface IWeatherService
 {
-    Task<GeocodingDto> GetGeocodingAsync();
+    Task<List<GeocodingDto>> GetGeocodingAsync(GeocodingRequest request);
 
-    Task<AirPollutionDto> GetAirPollutionAsync();
+    Task<AirPollutionDto> GetAirPollutionAsync(AirPollutionRequest request);
 
-    Task<CurrentWeatherDto> GetCurrentWeatherAsync();
+    Task<CurrentWeatherDto> GetCurrentWeatherAsync(CurrentWeatherRequest request);
 }
